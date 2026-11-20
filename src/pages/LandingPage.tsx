@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
 import '../styles/landing.css';
 
 import Topo from '../landing/Topo';
 import BotaoPlayStore, { SeloPlayStore } from '../landing/BotaoPlayStore';
 import VideoDemonstracao from '../landing/VideoDemonstracao';
-import Carrossel from '../landing/Carrossel';
+import TelasScroll from '../landing/TelasScroll';
 import Rodape from '../landing/Rodape';
 import useRevelar from '../landing/useRevelar';
 import usePalco from '../landing/usePalco';
@@ -57,8 +58,28 @@ const TIRA = [
   'Android, na Play Store',
 ];
 
+/** Links internos (#secao) com rolagem suave via JS, sem `scroll-behavior` no CSS (que atrapalha o ScrollTrigger). */
+function useAncorasSuaves() {
+  useEffect(() => {
+    const clique = (e: MouseEvent) => {
+      const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]');
+      if (!link) return;
+      const id = link.getAttribute('href')!.slice(1);
+      const alvo = id ? document.getElementById(id) : null;
+      if (!alvo) return;
+      e.preventDefault();
+      const menos = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      alvo.scrollIntoView({ behavior: menos ? 'auto' : 'smooth' });
+      history.replaceState(null, '', `#${id}`);
+    };
+    document.addEventListener('click', clique);
+    return () => document.removeEventListener('click', clique);
+  }, []);
+}
+
 export default function LandingPage() {
   useRevelar();
+  useAncorasSuaves();
   const palco = usePalco();
 
   return (
@@ -469,22 +490,23 @@ export default function LandingPage() {
 
         {/* ============================================ DENTRO DO APP */}
         <section className="sec" id="dentro-do-app" style={{ paddingTop: 0 }}>
+          <TelasScroll
+            telas={TELAS_DO_APP}
+            cabecalho={
+              <div className="ts-cabeca rev">
+                <Rotulo>05 / Dentro do app</Rotulo>
+                <h2 className="h2" style={{ marginTop: '14px' }}>
+                  O que acontece <span className="risco">depois que o plano sai.</span>
+                </h2>
+                <p className="lead" style={{ marginTop: '16px' }}>
+                  O plano não termina na consulta. Quem recebeu o plano marca as refeições feitas,
+                  registra água e atualiza o peso.
+                </p>
+              </div>
+            }
+          />
+
           <div className="wrap">
-            <div className="centro rev" style={{ maxWidth: '58ch', marginInline: 'auto' }}>
-              <Rotulo>05 / Dentro do app</Rotulo>
-              <h2 className="h2" style={{ marginTop: '14px' }}>
-                O que acontece <span className="risco">depois que o plano sai.</span>
-              </h2>
-              <p className="lead" style={{ marginTop: '16px' }}>
-                O plano não termina na consulta. Quem recebeu o plano marca as refeições feitas,
-                registra água e atualiza o peso.
-              </p>
-            </div>
-
-            <div className="rev-zoom">
-              <Carrossel telas={TELAS_DO_APP} />
-            </div>
-
             <p className="nota centro rev" style={{ marginTop: '28px', maxWidth: '74ch', marginInline: 'auto' }}>
               Hoje o dietAI é um app de uso individual: cada pessoa responde o questionário no
               próprio celular. Não existe painel para o profissional acompanhar vários pacientes em
