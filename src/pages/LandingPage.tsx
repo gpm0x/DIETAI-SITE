@@ -470,34 +470,22 @@ export default function LandingPage() {
         {/* ============================================ DENTRO DO APP */}
         <section className="sec" id="dentro-do-app" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            <div
-              className="rev"
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '20px',
-                alignItems: 'end',
-                justifyContent: 'space-between',
-                marginBottom: 'clamp(26px,3vw,40px)',
-              }}
-            >
-              <div style={{ maxWidth: '46ch' }}>
-                <Rotulo>05 / Dentro do app</Rotulo>
-                <h2 className="h2" style={{ marginTop: '14px' }}>
-                  O que acontece depois que o plano sai.
-                </h2>
-                <p className="lead" style={{ marginTop: '16px' }}>
-                  O plano não termina na consulta. Quem recebeu o plano marca as refeições feitas,
-                  registra água e atualiza o peso.
-                </p>
-              </div>
+            <div className="centro rev" style={{ maxWidth: '58ch', marginInline: 'auto' }}>
+              <Rotulo>05 / Dentro do app</Rotulo>
+              <h2 className="h2" style={{ marginTop: '14px' }}>
+                O que acontece <span className="risco">depois que o plano sai.</span>
+              </h2>
+              <p className="lead" style={{ marginTop: '16px' }}>
+                O plano não termina na consulta. Quem recebeu o plano marca as refeições feitas,
+                registra água e atualiza o peso.
+              </p>
             </div>
 
-            <div className="rev-dir">
+            <div className="rev-zoom">
               <Carrossel telas={TELAS_DO_APP} />
             </div>
 
-            <p className="nota rev" style={{ marginTop: '24px', maxWidth: '74ch' }}>
+            <p className="nota centro rev" style={{ marginTop: '28px', maxWidth: '74ch', marginInline: 'auto' }}>
               Hoje o dietAI é um app de uso individual: cada pessoa responde o questionário no
               próprio celular. Não existe painel para o profissional acompanhar vários pacientes em
               um só lugar.{' '}

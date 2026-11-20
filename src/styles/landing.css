@@ -266,30 +266,6 @@
   .passos > :nth-child(3){margin-top:48px}
 }
 
-/* ---------------------------------------------- Carrossel */
-.carrossel .trilho{
-  display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:4px 0 18px;scrollbar-width:none;scroll-behavior:smooth;
-}
-.carrossel .trilho::-webkit-scrollbar{display:none}
-.carrossel figure{
-  flex:0 0 auto;width:min(248px,68vw);scroll-snap-align:center;
-  background:var(--branco);border:1px solid var(--linha);border-radius:20px;padding:12px;
-  transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s;
-}
-.carrossel figure:hover{transform:translateY(-5px);box-shadow:var(--sombra)}
-.carrossel figure img{border-radius:12px;background:#0A0F0D}
-.carrossel figcaption{padding:14px 6px 4px;font-size:0.86rem;line-height:1.45;color:var(--tinta-2)}
-.carrossel figcaption b{display:block;color:var(--tinta);font-weight:600;margin-bottom:3px;letter-spacing:-0.015em}
-.carrossel .controles{display:flex;gap:10px;align-items:center}
-.carrossel .seta{
-  display:grid;place-items:center;width:44px;height:44px;border-radius:50%;
-  background:var(--branco);border:1px solid var(--linha);color:var(--tinta);cursor:pointer;
-  transition:transform .2s,border-color .2s;
-}
-.carrossel .seta:hover{transform:translateY(-2px);border-color:#CDD5D3}
-.carrossel .seta:disabled{opacity:.35;cursor:default;transform:none}
-
 /* ---------------------------------------------- Tabela */
 .tabela{width:100%;border-collapse:separate;border-spacing:0;text-align:left;font-size:0.98rem}
 .tabela th,.tabela td{padding:16px 18px;vertical-align:top;border-bottom:1px solid var(--linha)}
@@ -501,10 +477,6 @@
 }
 .capitulos b{font-weight:500;color:#D6DEDC;font-size:0.93rem}
 
-/* carrossel sangra ate a borda da tela */
-.carrossel{margin-inline:calc(var(--gut) * -1)}
-.carrossel .trilho{padding-inline:var(--gut)}
-.carrossel .controles{padding-inline:var(--gut)}
 
 
 /* ---------------------------------------------- Menu compacto */
@@ -757,3 +729,116 @@
 }
 .palco .legenda-painel b{color:var(--tinta);font-weight:600}
 .palco .legenda-painel .pt{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 3px rgba(6,214,160,.2)}
+
+/* ---------------------------------------------- Carrossel (Dentro do app) */
+.carrossel{
+  --card:clamp(200px,58vw,268px);
+  position:relative;margin-inline:calc(var(--gut) * -1);
+}
+/* luz mint atrás da tela ativa */
+.carrossel .halo{
+  position:absolute;left:50%;top:44%;translate:-50% -50%;z-index:0;pointer-events:none;
+  width:min(620px,110vw);aspect-ratio:1.4;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(6,214,160,.30),rgba(6,214,160,.08) 55%,transparent);
+  filter:blur(10px);
+}
+.carrossel .trilho{
+  position:relative;z-index:1;
+  display:flex;align-items:center;gap:clamp(4px,1.4vw,18px);
+  overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  padding:28px calc(50% - var(--card) / 2) 90px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);
+  outline:none;
+}
+.carrossel .trilho::-webkit-scrollbar{display:none}
+.carrossel .trilho:focus-visible .ativo .moldura{outline:2px solid var(--mint-texto);outline-offset:6px}
+
+.carrossel figure{
+  flex:0 0 var(--card);scroll-snap-align:center;cursor:pointer;
+  transform:scale(.82);opacity:.45;filter:saturate(.6);
+  transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .6s,filter .6s;
+}
+.carrossel figure:hover{opacity:.7}
+.carrossel figure.ativo{transform:scale(1);opacity:1;filter:none;cursor:default}
+
+/* moldura de celular, mesma linguagem do hero */
+.carrossel .moldura{
+  --w:var(--card);
+  position:relative;padding:7px;border-radius:calc(var(--w) * .16);
+  background:linear-gradient(160deg,#2A3330,#101614 40%,#1B2320);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 0 0 1px rgba(0,0,0,.5),0 30px 50px -28px rgba(10,15,13,.55);
+  transition:box-shadow .6s;
+}
+.carrossel figure.ativo .moldura{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 0 0 1px rgba(0,0,0,.5),
+    0 50px 80px -34px rgba(10,15,13,.6),0 24px 60px -24px rgba(6,214,160,.55);
+}
+.carrossel .moldura img{width:100%;border-radius:0 0 calc(var(--w) * .13) calc(var(--w) * .13);background:#0A0F0D}
+.carrossel .moldura::after{
+  content:'';position:absolute;inset:7px;border-radius:calc(var(--w) * .13);pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.10),rgba(255,255,255,0) 32%);
+}
+.carrossel .status{
+  position:relative;display:flex;align-items:center;justify-content:space-between;
+  height:calc(var(--w) * .115);padding:0 calc(var(--w) * .085);
+  border-radius:calc(var(--w) * .13) calc(var(--w) * .13) 0 0;
+  background:var(--tela) center top / 100% 6000% no-repeat,#0A0F0D;
+  color:#04332A;font-size:calc(var(--w) * .042);font-weight:600;
+}
+.carrossel .status i{font-style:normal}
+.carrossel .status em{
+  width:calc(var(--w) * .075);height:calc(var(--w) * .036);border-radius:3px;border:1.5px solid currentColor;opacity:.85;
+  background:linear-gradient(90deg,currentColor 70%,transparent 70%) 1px 1px / calc(100% - 2px) calc(100% - 2px) no-repeat;
+}
+.carrossel .status::before{
+  content:'';position:absolute;left:50%;top:50%;translate:-50% -50%;
+  width:30%;height:58%;border-radius:999px;background:#05080A;
+}
+
+/* legenda da tela ativa + setas */
+.carrossel .painel-info{
+  position:relative;z-index:1;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+  max-width:620px;margin:-56px auto 0;padding-inline:var(--gut);
+}
+.carrossel .legenda{display:grid;gap:8px;min-height:92px}
+.carrossel .contador{color:var(--tinta-2)}
+.carrossel .contador b{color:var(--mint-texto);font-weight:500}
+.carrossel .texto-ativo .h3{font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem);letter-spacing:-0.03em}
+.carrossel .texto-ativo p{margin-top:4px;color:var(--tinta-2);max-width:40ch}
+.carrossel .controles{display:flex;gap:10px;flex:none}
+.carrossel .seta{
+  display:grid;place-items:center;width:48px;height:48px;border-radius:50%;font-size:1.05rem;
+  background:var(--branco);border:1px solid var(--linha);color:var(--tinta);cursor:pointer;
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),border-color .2s,background-color .2s,box-shadow .25s;
+}
+.carrossel .seta:hover{transform:translateY(-2px);border-color:#CDD5D3;box-shadow:var(--sombra)}
+.carrossel .seta--cheia{background:var(--tinta);border-color:var(--tinta);color:var(--branco)}
+.carrossel .seta--cheia:hover{background:#17201C;border-color:#17201C}
+
+/* indicadores: o ativo vira uma pílula com a barra do avanço automático */
+.carrossel .pontos{
+  position:relative;z-index:1;display:flex;justify-content:center;gap:8px;margin-top:22px;
+}
+.carrossel .pontos button{
+  position:relative;width:8px;height:8px;padding:0;border:0;border-radius:999px;cursor:pointer;
+  background:#CBD3D1;overflow:hidden;
+  transition:width .5s cubic-bezier(.16,1,.3,1),background-color .3s;
+}
+.carrossel .pontos button:hover{background:#A9B4B1}
+.carrossel .pontos button.ativo{width:42px;background:var(--mint-borda)}
+.carrossel .pontos button span{position:absolute;inset:0;border-radius:inherit;background:var(--mint-texto);transform:scaleX(0);transform-origin:0 50%}
+.carrossel .pontos button.ativo span{transform:scaleX(1)}
+.carrossel[data-rodando='sim'] .pontos button.ativo span{animation:encher linear both}
+@keyframes encher{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+@media (prefers-reduced-motion:no-preference){
+  .carrossel .texto-ativo{animation:trocar .55s cubic-bezier(.16,1,.3,1) both}
+  @keyframes trocar{from{opacity:0;transform:translateY(10px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+}
+@media (max-width:560px){
+  .carrossel .painel-info{flex-direction:column;align-items:stretch}
+  .carrossel .controles{justify-content:flex-start}
+  .carrossel .legenda{min-height:110px}
+}
