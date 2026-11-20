@@ -614,11 +614,8 @@ export default function LandingPage() {
 
             <div className="fundadores" style={{ marginTop: 'clamp(30px,4vw,48px)' }}>
               {FUNDADORES.map((f, i) => (
-                <article
-                  key={f.nome}
-                  className={i === 0 ? 'fundador rev-esq' : 'fundador fundador--escuro rev-dir'}
-                >
-                  <div className="retrato">
+                <article key={f.nome} className={`fundador ${i === 0 ? 'rev-esq' : 'rev-dir'}`}>
+                  <div className={`retrato retrato--${f.recorte ? 'recorte' : 'foto'}`}>
                     <img
                       src={f.foto}
                       width={f.dimensoes[0]}
@@ -627,12 +624,12 @@ export default function LandingPage() {
                       loading="lazy"
                       decoding="async"
                     />
-                  </div>
-                  <div className="corpo">
-                    <div>
+                    <div className="identidade">
                       <p className="mono papel">{f.papel}</p>
                       <h3 className="h3">{f.nome}</h3>
                     </div>
+                  </div>
+                  <div className="corpo">
                     <p>{f.bio.startsWith('[') ? <Pendente>{f.bio}</Pendente> : f.bio}</p>
                     {f.tags.length > 0 && (
                       <div className="tags">

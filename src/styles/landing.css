@@ -550,57 +550,58 @@
 @media (min-width:820px){.fundadores{grid-template-columns:1fr 1fr}}
 .fundador{
   position:relative;overflow:hidden;isolation:isolate;
-  background:var(--branco);border:1px solid var(--linha);border-radius:var(--r-card);
-  display:grid;grid-template-columns:1fr;
-  transition:transform .4s cubic-bezier(.2,.7,.3,1),box-shadow .4s,border-color .4s;
+  background:var(--tinta);border:1px solid var(--tinta);border-radius:var(--r-card);color:var(--branco);
+  transition:transform .4s cubic-bezier(.2,.7,.3,1),box-shadow .4s;
 }
-.fundador:hover{transform:translateY(-6px);box-shadow:var(--sombra-alta);border-color:var(--mint-borda)}
-.fundador--escuro{background:var(--tinta);border-color:var(--tinta);color:var(--branco)}
+.fundador:hover{transform:translateY(-6px);box-shadow:var(--sombra-alta)}
 
-/* foto: em cima no celular, à esquerda a partir do tablet */
+/* retrato: mesmo enquadramento e mesmo "estúdio" escuro para os dois */
 .fundador .retrato{
-  position:relative;overflow:hidden;aspect-ratio:1/1;background:#FFFFFF;
+  position:relative;overflow:hidden;aspect-ratio:4/5;
+  background:radial-gradient(85% 70% at 50% 32%,#2E2E2E 0%,#161616 55%,#0D0D0D 100%);
 }
-.fundador--escuro .retrato{background:#151515}
-.fundador .retrato img{
-  width:100%;height:100%;object-fit:cover;object-position:50% 12%;
-  transition:transform .8s cubic-bezier(.2,.7,.3,1),filter .6s;
-}
-.fundador:hover .retrato img{transform:scale(1.045)}
-/* emenda a foto com o cartão */
-.fundador .retrato::after{
-  content:'';position:absolute;inset:auto 0 0 0;height:38%;pointer-events:none;
-  background:linear-gradient(to top,var(--branco),rgba(255,255,255,0));
-}
-.fundador--escuro .retrato::after{background:linear-gradient(to top,var(--tinta),rgba(10,15,13,0))}
-/* filete mint que cresce no hover */
+/* luz mint por trás, discreta */
 .fundador .retrato::before{
-  content:'';position:absolute;left:0;bottom:0;z-index:2;height:3px;width:100%;
-  background:var(--mint);transform:scaleX(.18);transform-origin:0 50%;
-  transition:transform .7s cubic-bezier(.16,1,.3,1);
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(55% 45% at 50% 30%,rgba(6,214,160,.16),transparent 70%);
+  opacity:.7;transition:opacity .6s;
 }
-.fundador:hover .retrato::before{transform:scaleX(1)}
+.fundador:hover .retrato::before{opacity:1}
+.fundador .retrato img{
+  position:relative;width:100%;height:100%;object-fit:cover;object-position:50% 0;
+  transition:transform .9s cubic-bezier(.2,.7,.3,1);
+}
+/* o recorte é meio corpo; aproxima para a cabeça ficar do mesmo tamanho que a do retrato ao lado */
+.fundador .retrato--recorte img{transform:translateY(5%) scale(1.14);transform-origin:50% 0}
+.fundador:hover .retrato--foto img{transform:scale(1.04)}
+.fundador:hover .retrato--recorte img{transform:translateY(5%) scale(1.18)}
 
-.fundador .corpo{position:relative;display:grid;gap:14px;align-content:end;padding:clamp(20px,2.6vw,30px)}
-.fundador .papel{color:var(--mint-texto)}
-.fundador--escuro .papel{color:var(--mint)}
-.fundador .h3{margin-top:6px;font-size:clamp(1.45rem,1.1rem + 1.1vw,2rem);letter-spacing:-0.035em;line-height:1.1}
-.fundador .corpo > p{color:var(--tinta-2)}
-.fundador--escuro .corpo > p{color:#98A3A0}
+/* nome sobre a base da foto */
+.fundador .retrato::after{
+  content:'';position:absolute;inset:auto 0 0 0;height:46%;pointer-events:none;
+  background:linear-gradient(to top,var(--tinta) 6%,rgba(10,15,13,.75) 40%,rgba(10,15,13,0));
+}
+.fundador .identidade{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:0 clamp(20px,2.6vw,28px) 4px}
+.fundador .papel{color:var(--mint)}
+.fundador .h3{margin-top:6px;font-size:clamp(1.5rem,1.15rem + 1.1vw,2rem);letter-spacing:-0.035em;line-height:1.1}
+
+.fundador .corpo{display:grid;gap:14px;padding:16px clamp(20px,2.6vw,28px) clamp(22px,2.6vw,28px)}
+/* filete mint que cresce no hover */
+.fundador .corpo::before{
+  content:'';display:block;height:2px;width:100%;border-radius:2px;background:var(--mint);
+  transform:scaleX(.14);transform-origin:0 50%;transition:transform .7s cubic-bezier(.16,1,.3,1);
+}
+.fundador:hover .corpo::before{transform:scaleX(1)}
+.fundador .corpo > p{color:#98A3A0}
 .fundador .tags{display:flex;flex-wrap:wrap;gap:8px}
 .fundador .tags span{
   font-size:.78rem;font-weight:500;padding:5px 12px;border-radius:var(--r-pill);
-  background:var(--fundo);border:1px solid var(--linha);color:var(--tinta-2);
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#C9D2CF;
 }
-.fundador--escuro .tags span{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#C9D2CF}
 
-@media (min-width:560px) and (max-width:819px), (min-width:1100px){
-  .fundador{grid-template-columns:minmax(0,.95fr) minmax(0,1fr)}
-  .fundador .retrato{aspect-ratio:auto;min-height:340px}
-  /* foto do Eliel já tem fundo branco: só o cartão escuro precisa emendar */
-  .fundador .retrato::after{display:none}
-  .fundador--escuro .retrato::after{display:block;inset:0 0 0 auto;width:34%;height:auto;background:linear-gradient(to left,var(--tinta),rgba(10,15,13,0))}
-}
+/* dois cartões de retrato, centralizados e sem esticar demais */
+.fundadores{max-width:900px;margin-inline:auto}
+@media (max-width:819px){.fundadores{max-width:440px}}
 .manifesto{
   margin-top:14px;background:var(--mint-fundo);border:1px solid var(--mint-borda);border-radius:var(--r-card);
   padding:clamp(22px,3vw,32px);display:grid;gap:10px;

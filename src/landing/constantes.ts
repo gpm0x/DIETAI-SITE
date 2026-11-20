@@ -158,6 +158,8 @@ export type Fundador = {
   foto: string;
   /** largura x altura reais do arquivo, para evitar salto de layout */
   dimensoes: [number, number];
+  /** foto recortada (fundo transparente): recebe o fundo de estúdio por CSS */
+  recorte?: boolean;
   bio: string;
   tags: string[];
 };
@@ -168,6 +170,7 @@ export const FUNDADORES: Fundador[] = [
     papel: 'CEO e cofundador',
     foto: '/app/fundador-eliel.webp',
     dimensoes: [340, 473],
+    recorte: true,
     bio: '[PREENCHER: bio curta do Eliel — formação, o que faz no dietAI e por que começou o projeto]',
     tags: [],
   },
