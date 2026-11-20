@@ -154,25 +154,29 @@ export const FEEDBACKS: string[] = [
 
 export type Fundador = {
   nome: string;
-  iniciais: string;
   papel: string;
+  foto: string;
+  /** largura x altura reais do arquivo, para evitar salto de layout */
+  dimensoes: [number, number];
   bio: string;
   tags: string[];
 };
 
 export const FUNDADORES: Fundador[] = [
   {
-    nome: 'Gabriel Mota',
-    iniciais: 'GM',
-    papel: 'Cofundador',
-    bio: '[PREENCHER: bio curta do Gabriel — formação, o que faz no dietAI e por que começou o projeto]',
+    nome: 'Eliel Nicolas',
+    papel: 'CEO e cofundador',
+    foto: '/app/fundador-eliel.webp',
+    dimensoes: [340, 473],
+    bio: '[PREENCHER: bio curta do Eliel — formação, o que faz no dietAI e por que começou o projeto]',
     tags: [],
   },
   {
-    nome: 'Eliel Nicolas',
-    iniciais: 'EN',
-    papel: 'Cofundador',
-    bio: '[PREENCHER: bio curta do Eliel — formação, o que faz no dietAI e por que começou o projeto]',
+    nome: 'Gabriel Mota',
+    papel: 'CTO e cofundador',
+    foto: '/app/fundador-gabriel.webp',
+    dimensoes: [800, 1034],
+    bio: '[PREENCHER: bio curta do Gabriel — formação, o que faz no dietAI e por que começou o projeto]',
     tags: [],
   },
 ];

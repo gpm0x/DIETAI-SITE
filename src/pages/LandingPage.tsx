@@ -607,7 +607,7 @@ export default function LandingPage() {
                 Os fundadores <span className="risco">do dietAI.</span>
               </h2>
               <p className="lead" style={{ marginTop: '16px' }}>
-                O dietAI foi criado por Gabriel Mota e Eliel Nicolas. São eles que respondem pelo
+                O dietAI foi criado por Eliel Nicolas e Gabriel Mota. São eles que respondem pelo
                 produto, leem o feedback que chega e decidem o que entra na próxima versão.
               </p>
             </div>
@@ -618,23 +618,30 @@ export default function LandingPage() {
                   key={f.nome}
                   className={i === 0 ? 'fundador rev-esq' : 'fundador fundador--escuro rev-dir'}
                 >
-                  <div className="cabeca">
-                    <span className="foto" aria-hidden="true">
-                      {f.iniciais}
-                    </span>
-                    <div>
-                      <h3 className="h3">{f.nome}</h3>
-                      <p className="mono papel">{f.papel} · dietAI</p>
-                    </div>
+                  <div className="retrato">
+                    <img
+                      src={f.foto}
+                      width={f.dimensoes[0]}
+                      height={f.dimensoes[1]}
+                      alt={`Foto de ${f.nome}, ${f.papel} do dietAI`}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
-                  <p>{f.bio.startsWith('[') ? <Pendente>{f.bio}</Pendente> : f.bio}</p>
-                  {f.tags.length > 0 && (
-                    <div className="tags">
-                      {f.tags.map((t) => (
-                        <span key={t}>{t}</span>
-                      ))}
+                  <div className="corpo">
+                    <div>
+                      <p className="mono papel">{f.papel}</p>
+                      <h3 className="h3">{f.nome}</h3>
                     </div>
-                  )}
+                    <p>{f.bio.startsWith('[') ? <Pendente>{f.bio}</Pendente> : f.bio}</p>
+                    {f.tags.length > 0 && (
+                      <div className="tags">
+                        {f.tags.map((t) => (
+                          <span key={t}>{t}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </article>
               ))}
             </div>
@@ -647,7 +654,7 @@ export default function LandingPage() {
                 Montar a primeira versão de uma dieta não deveria levar uma tarde de planilha. O
                 dietAI faz essa parte para sobrar tempo para o que precisa de gente.
               </p>
-              <Pendente>[CONFIRMAR: foto dos dois fundadores e a história da empresa]</Pendente>
+              <Pendente>[CONFIRMAR: a história da empresa]</Pendente>
             </div>
           </div>
         </section>
