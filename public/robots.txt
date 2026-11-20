@@ -1,28 +1,4 @@
-# robots.txt para DietAI
-
-# Permitir todos os crawlers
 User-agent: *
 Allow: /
 
-# Desabilitar crawlers específicos indesejados
-User-agent: AdsBot-Google
-Disallow: /
-
-# Permitir Googlebot
-User-agent: Googlebot
-Allow: /
-
-# Permitir Googlebot para imagens
-User-agent: Googlebot-Image
-Allow: /
-
-# Permitir Bingbot
-User-agent: Bingbot
-Allow: /
-
-# Sitemap
-Sitemap: https://diet-ai-steel.vercel.app/sitemap.xml
-
-# Crawl-delay para bots mais pesados
-User-agent: Slurp
-Crawl-delay: 10
+Sitemap: https://dietai-pearl.vercel.app/sitemap.xml

@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import LandingPage from './pages/LandingPage';
-import VideoDemo from './pages/VideoDemo';
-import Dashboard from './pages/Dashboard';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+
+// A pagina legal sai do bundle da pagina de vendas.
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -17,12 +17,13 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/video" element={<VideoDemo />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/privacidade" element={<PrivacyPolicy />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/privacidade" element={<PrivacyPolicy />} />
+          <Route path="*" element={<LandingPage />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
