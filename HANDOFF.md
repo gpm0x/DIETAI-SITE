@@ -56,7 +56,7 @@ Centralizado, como a referência: pílula "Android · Disponível na Google Play
 
 | Arquivo | Origem |
 |---|---|
-| `public/app/plano-do-dia.webp`, `resumo-diario`, `chat-ia`, `itens-refeicao`, `alimentos-sugeridos`, `resumo-nutricional`, `habitos-agua`, `progresso-metas` | prints 720×1600 publicados pelo próprio dietAI na Google Play, baixados em 19/11/2026, com a barra de status recortada |
+| `public/app/login`, `cadastro`, `dados-pessoais`, `nivel-atividade`, `inicio`, `refeicoes`, `chat-ia`, `progresso`, `configuracoes` (.webp) | telas do novo design do app (prints de 20/11/2026), convertidas para 720×1527 com a barra de status recortada; originais em `originais-app/` |
 | `public/app/passo-1-dados`, `passo-2-plano`, `passo-3-ajuste`, `aviso-ia`, `video-poster` | recortes de frames do `public/dietAI.mp4` (gravação real de tela, 382×850) |
 | `public/badge-google-play.webp` | selo oficial em pt-BR servido pelo Google |
 | `public/og-dietai.jpg` | 1200×630 gerado a partir do design da página |

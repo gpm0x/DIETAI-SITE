@@ -77,6 +77,15 @@ function useAncorasSuaves() {
   }, []);
 }
 
+/** Recursos que aparecem nas telas do app. Confirmar se valem para os dois planos. */
+const RECURSOS_DO_PLANO = [
+  'Plano alimentar montado pela IA',
+  'Ajustes por conversa com a IA',
+  'Registro de refeições, calorias e macros',
+  'Progresso de peso, meta e IMC',
+  'Lembretes de refeição e água',
+];
+
 export default function LandingPage() {
   useRevelar();
   useAncorasSuaves();
@@ -136,46 +145,46 @@ export default function LandingPage() {
                 <div className="aro" aria-hidden="true" />
 
                 <div className="vitrine">
-                  <div className="aparelho aparelho--esq" style={{ ['--tela' as string]: 'url(/app/resumo-diario.webp)' }}>
+                  <div className="aparelho aparelho--esq" style={{ ['--tela' as string]: 'url(/app/refeicoes.webp)' }}>
                     <span className="status" aria-hidden="true">
                       <i>9:41</i>
                       <em />
                     </span>
                     <img
-                      src="/app/resumo-diario.webp"
+                      src="/app/refeicoes.webp"
                       width={PRINT_LOJA.largura}
                       height={PRINT_LOJA.altura}
-                      alt="Resumo diário do dietAI com refeições concluídas, hidratação e peso atual"
+                      alt="Tela de refeições do dietAI com calorias de hoje e macronutrientes"
                       loading="lazy"
                       decoding="async"
                     />
                   </div>
 
-                  <div className="aparelho aparelho--centro" style={{ ['--tela' as string]: 'url(/app/plano-do-dia.webp)' }}>
+                  <div className="aparelho aparelho--centro" style={{ ['--tela' as string]: 'url(/app/inicio.webp)' }}>
                     <span className="status" aria-hidden="true">
                       <i>9:41</i>
                       <em />
                     </span>
                     <img
-                      src="/app/plano-do-dia.webp"
+                      src="/app/inicio.webp"
                       width={PRINT_LOJA.largura}
                       height={PRINT_LOJA.altura}
-                      alt="Tela inicial do dietAI com perfil, IMC, altura, peso e o plano do dia dividido em quatro refeições"
+                      alt="Tela inicial do dietAI com o plano de hoje em quatro refeições, calorias do dia e progresso da semana"
                       {...{ fetchpriority: 'high' }}
                       decoding="async"
                     />
                   </div>
 
-                  <div className="aparelho aparelho--dir" style={{ ['--tela' as string]: 'url(/app/progresso-metas.webp)' }}>
+                  <div className="aparelho aparelho--dir" style={{ ['--tela' as string]: 'url(/app/progresso.webp)' }}>
                     <span className="status" aria-hidden="true">
                       <i>9:41</i>
                       <em />
                     </span>
                     <img
-                      src="/app/progresso-metas.webp"
+                      src="/app/progresso.webp"
                       width={PRINT_LOJA.largura}
                       height={PRINT_LOJA.altura}
-                      alt="Tela de progresso do dietAI com peso atual, meta de peso, altura e IMC"
+                      alt="Tela de progresso do dietAI com peso atual, meta de peso e IMC"
                       loading="lazy"
                       decoding="async"
                     />
@@ -319,9 +328,9 @@ export default function LandingPage() {
                 <div className="tela">
                   <img
                     src="/app/passo-1-dados.webp"
-                    width={362}
-                    height={400}
-                    alt="Etapa 2 de 3 do formulário do dietAI, com gênero feminino, nível moderadamente ativo e objetivo ganhar massa muscular preenchidos"
+                    width={724}
+                    height={822}
+                    alt="Formulário do dietAI pedindo nome completo, idade, peso e altura"
                     loading="lazy"
                     decoding="async"
                   />
@@ -342,9 +351,9 @@ export default function LandingPage() {
                 <div className="tela">
                   <img
                     src="/app/passo-2-plano.webp"
-                    width={362}
-                    height={520}
-                    alt="Plano de refeições gerado pela IA: café da manhã às 7h30 e almoço às 12h30, cada um com itens e o total de proteínas, carboidratos e gorduras"
+                    width={724}
+                    height={536}
+                    alt="Cartão plano de hoje do dietAI: próxima refeição café da manhã às 8h, quatro refeições no dia e meta de 1410 kcal"
                     loading="lazy"
                     decoding="async"
                   />
@@ -365,9 +374,9 @@ export default function LandingPage() {
                 <div className="tela">
                   <img
                     src="/app/passo-3-ajuste.webp"
-                    width={362}
-                    height={345}
-                    alt="A IA pergunta se o plano novo está de acordo e oferece os botões atualizar dieta e gerar outra dieta"
+                    width={724}
+                    height={697}
+                    alt="Sugestões rápidas para a IA do dietAI, como meu orçamento caiu para 300 reais por mês e agora treino à noite"
                     loading="lazy"
                     decoding="async"
                   />
@@ -579,22 +588,52 @@ export default function LandingPage() {
               </h2>
             </div>
 
-            <div
-              className="bloco-pendente rev"
-              style={{ marginTop: 'clamp(26px,3vw,40px)', maxWidth: '74ch', marginInline: 'auto' }}
-            >
-              <Pendente>[PREENCHER: o que é gratuito]</Pendente>
-              <Pendente>[PREENCHER: o que é pago e quanto custa]</Pendente>
-              <Pendente>[PREENCHER: como funciona o teste e por quanto tempo]</Pendente>
-              <p className="nota">
-                Enquanto o plano comercial não estiver fechado, a página não anuncia valor. Baixar
-                na Play Store continua sendo o caminho para testar.
-              </p>
+            <div className="planos rev-grupo">
+              <article className="plano">
+                <p className="mono plano-nome">Mensal</p>
+                <p className="plano-preco">
+                  <span className="moeda">R$</span>
+                  <b>19</b>
+                  <span className="centavos">,99</span>
+                  <span className="periodo">/mês</span>
+                </p>
+                <p className="plano-resumo">Para começar agora e pagar mês a mês.</p>
+                <ul className="plano-lista">
+                  {RECURSOS_DO_PLANO.map((r) => (
+                    <li key={r}>{r}</li>
+                  ))}
+                </ul>
+                <BotaoPlayStore origem="meio" texto="Assinar mensal" variante="vazio" comSeta />
+              </article>
+
+              <article className="plano plano--destaque">
+                <span className="plano-selo">Mais escolhido</span>
+                <p className="mono plano-nome">Anual</p>
+                <p className="plano-preco">
+                  <span className="moeda">R$</span>
+                  <b>239</b>
+                  <span className="periodo">/ano</span>
+                </p>
+                <p className="plano-resumo">
+                  Um pagamento só, o equivalente a <strong>R$ 19,92 por mês</strong>. Um ano inteiro
+                  sem pensar em renovação.
+                </p>
+                <ul className="plano-lista">
+                  {RECURSOS_DO_PLANO.map((r) => (
+                    <li key={r}>{r}</li>
+                  ))}
+                </ul>
+                <BotaoPlayStore origem="meio" texto="Assinar anual" comSeta />
+              </article>
             </div>
 
-            <p className="centro rev" style={{ marginTop: '28px' }}>
-              <BotaoPlayStore origem="meio" comSeta />
-            </p>
+            <div
+              className="bloco-pendente rev"
+              style={{ marginTop: '22px', maxWidth: '74ch', marginInline: 'auto' }}
+            >
+              <Pendente>[PREENCHER: o que é gratuito e confirmar se a lista acima vale para os dois planos]</Pendente>
+              <Pendente>[PREENCHER: como funciona o teste e por quanto tempo]</Pendente>
+            </div>
           </div>
         </section>
 
@@ -721,10 +760,10 @@ export default function LandingPage() {
 
                 <img
                   className="fone-cta"
-                  src="/app/itens-refeicao.webp"
+                  src="/app/chat-ia.webp"
                   width={PRINT_LOJA.largura}
                   height={PRINT_LOJA.altura}
-                  alt="Tela de registro de refeição do dietAI com os itens da refeição e as calorias de cada um"
+                  alt="Assistente nutricional do dietAI com resumo do dia e sugestões rápidas de perguntas para a IA"
                   loading="lazy"
                   decoding="async"
                 />

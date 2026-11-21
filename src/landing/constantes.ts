@@ -6,7 +6,7 @@ export const PLAY_STORE_URL =
 export const INSTAGRAM_URL = 'https://www.instagram.com/dietal_oficial/';
 
 /** Dimensões reais dos prints, usadas em width/height para evitar CLS. */
-export const PRINT_LOJA = { largura: 720, altura: 1458 };
+export const PRINT_LOJA = { largura: 720, altura: 1527 };
 export const PRINT_VIDEO = { largura: 382, altura: 786 };
 
 export type TelaDoApp = {
@@ -16,55 +16,61 @@ export type TelaDoApp = {
   alt: string;
 };
 
-/** Prints publicados pelo dietAI na Google Play, consultados em 19/11/2026. */
+/** Telas do novo design do app (prints de 20/11/2026, em public/app). */
 export const TELAS_DO_APP: TelaDoApp[] = [
   {
-    arquivo: 'plano-do-dia',
-    titulo: 'Plano do dia',
-    texto: 'Perfil, IMC e as refeições do dia, uma a uma.',
-    alt: 'Tela inicial do dietAI com perfil, IMC, altura, peso e o plano do dia em quatro refeições',
+    arquivo: 'login',
+    titulo: 'Entrada',
+    texto: 'Acesso com e-mail ou com a conta Google.',
+    alt: 'Tela de boas-vindas do dietAI com login por e-mail e senha e o botão continuar com Google',
   },
   {
-    arquivo: 'resumo-diario',
-    titulo: 'Resumo diário',
-    texto: 'Refeições concluídas, hidratação e peso atual.',
-    alt: 'Resumo diário do dietAI com refeições concluídas, hidratação de 3 litros e peso atual',
+    arquivo: 'cadastro',
+    titulo: 'Criar conta',
+    texto: 'Cadastro em três passos, com o que o app entrega logo no topo.',
+    alt: 'Tela de criar conta do dietAI, passo 1 de 3, com plano personalizado, acompanhamento, IA e hidratação',
+  },
+  {
+    arquivo: 'dados-pessoais',
+    titulo: 'Dados do perfil',
+    texto: 'Nome, idade, peso e altura para calcular o plano.',
+    alt: 'Etapa vamos começar do dietAI pedindo nome completo, idade, peso e altura',
+  },
+  {
+    arquivo: 'nivel-atividade',
+    titulo: 'Gênero e atividade',
+    texto: 'Do sedentário ao atleta, para acertar o gasto do dia.',
+    alt: 'Etapa quase lá do dietAI com escolha de gênero e nível de atividade, de sedentário a atleta',
+  },
+  {
+    arquivo: 'inicio',
+    titulo: 'Plano de hoje',
+    texto: 'Próxima refeição, calorias do dia e a semana em sequência.',
+    alt: 'Tela inicial do dietAI com o plano de hoje, próxima refeição, calorias, progresso da semana e jornada',
+  },
+  {
+    arquivo: 'refeicoes',
+    titulo: 'Refeições e macros',
+    texto: 'Calorias do dia e quanto falta de proteína, carboidrato e gordura.',
+    alt: 'Tela de refeições do dietAI com calorias de hoje, macronutrientes e os botões buscar alimento e manual',
   },
   {
     arquivo: 'chat-ia',
     titulo: 'Ajuste por conversa',
-    texto: 'O paciente conta o que come e a IA reescreve o plano.',
-    alt: 'Conversa dentro do dietAI em que a IA pergunta quais alimentos a pessoa tem em casa',
+    texto: 'Mudou a rotina ou o orçamento? A IA reescreve o plano.',
+    alt: 'Assistente nutricional do dietAI com resumo do dia e sugestões rápidas de perguntas para a IA',
   },
   {
-    arquivo: 'itens-refeicao',
-    titulo: 'Registro de refeição',
-    texto: 'Cada refeição marcada, com as calorias do que foi comido.',
-    alt: 'Lista de itens de refeições concluídas no dietAI, cada uma com o total de calorias',
+    arquivo: 'progresso',
+    titulo: 'Progresso e IMC',
+    texto: 'Peso atual, meta, quanto falta e a faixa saudável.',
+    alt: 'Tela de progresso do dietAI com peso de hoje, meta de peso, porcentagem da meta e IMC',
   },
   {
-    arquivo: 'alimentos-sugeridos',
-    titulo: 'Alimentos sugeridos',
-    texto: 'Sugestões com proteína, carboidrato e gordura de cada item.',
-    alt: 'Tela de alimentos sugeridos do dietAI com frango grelhado e arroz integral e seus macros',
-  },
-  {
-    arquivo: 'resumo-nutricional',
-    titulo: 'Resumo nutricional',
-    texto: 'Soma de calorias e macros do que foi registrado.',
-    alt: 'Resumo nutricional do dietAI somando calorias, proteínas e carboidratos do dia',
-  },
-  {
-    arquivo: 'habitos-agua',
-    titulo: 'Hábitos e água',
-    texto: 'Dias seguidos cumpridos e registro de água em um toque.',
-    alt: 'Tela do dietAI com sequência de hábitos e registro rápido de água em 250, 500 e 750 mililitros',
-  },
-  {
-    arquivo: 'progresso-metas',
-    titulo: 'Metas e IMC',
-    texto: 'Peso atual, meta, altura e IMC, com o quanto falta.',
-    alt: 'Tela de progresso do dietAI com peso atual, meta de peso, altura e IMC',
+    arquivo: 'configuracoes',
+    titulo: 'Perfil e lembretes',
+    texto: 'Conta, sequência de dias e lembretes de refeição e água.',
+    alt: 'Tela de configurações do dietAI com perfil, sequência, hidratação e lembretes de refeição e água',
   },
 ];
 
@@ -95,7 +101,8 @@ export const PERGUNTAS: Pergunta[] = [
     id: 'preco',
     pergunta: 'Quanto custa?',
     resposta: [
-      '[PREENCHER: o que é gratuito, o que é pago, valor de cada plano e o que entra em cada um]',
+      'Há dois planos: mensal, por R$ 19,99 por mês, e anual, por R$ 239 por ano (o equivalente a R$ 19,92 por mês).',
+      '[PREENCHER: o que é gratuito e o que entra nos planos pagos]',
     ],
   },
   {
@@ -171,15 +178,15 @@ export const FUNDADORES: Fundador[] = [
     foto: '/app/fundador-eliel.webp',
     dimensoes: [340, 473],
     recorte: true,
-    bio: '[PREENCHER: bio curta do Eliel — formação, o que faz no dietAI e por que começou o projeto]',
-    tags: [],
+    bio: 'Cuida da direção do produto e de quem usa o app. É quem lê o feedback que chega e transforma em prioridade para a próxima versão.',
+    tags: ['Produto', 'Parcerias', 'Comunidade'],
   },
   {
     nome: 'Gabriel Mota',
     papel: 'CTO e cofundador',
     foto: '/app/fundador-gabriel.webp',
     dimensoes: [800, 1034],
-    bio: '[PREENCHER: bio curta do Gabriel — formação, o que faz no dietAI e por que começou o projeto]',
-    tags: [],
+    bio: 'Responde pela tecnologia por trás do app, da IA que monta o plano ao design das telas, e por levar cada melhoria do código até a Play Store.',
+    tags: ['Tecnologia', 'IA', 'Design do app'],
   },
 ];
